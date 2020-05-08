@@ -1,5 +1,7 @@
 package com.cheersport.dao;
 
+import com.cheersport.model.Club;
+import com.cheersport.model.Coach;
 import com.cheersport.model.Team;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -29,6 +31,12 @@ public class TeamDao {
 
     public void addTeam(Team t) {
         Session session = sessionFactory.getCurrentSession();
+        Club club = (Club) session.createQuery("select c from Club c where c.id = " + t.getClubId()).uniqueResult();
+        Coach coach = (Coach) session.createQuery("select c from Coach c where c.id = " + t.getClubId()).uniqueResult();
+
+        t.setClub(club);
+        t.setCoach(coach);
+
         session.saveOrUpdate(t);
     }
 

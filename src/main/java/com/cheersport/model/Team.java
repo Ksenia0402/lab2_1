@@ -17,33 +17,13 @@ public class Team {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "clubid")
-    private int clubId;
+    @ManyToOne
+    @JoinColumn(name = "clubid")
+    private Club club;
 
-    @Column(name = "coachid")
-    private int coachId;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Team team = (Team) o;
-
-        if (id != team.id) return false;
-        if (clubId != team.clubId) return false;
-        if (coachId != team.coachId) return false;
-        return name != null ? name.equals(team.name) : team.name == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + clubId;
-        result = 31 * result + coachId;
-        return result;
-    }
+    @ManyToOne
+    @JoinColumn(name = "coachid")
+    private Coach coach;
 
     public int getId() {
         return id;
@@ -61,20 +41,48 @@ public class Team {
         this.name = name;
     }
 
+    public Club getClub() {
+        return club;
+    }
+
+    public void setClub(Club club) {
+        this.club = club;
+    }
+
     public int getClubId() {
-        return clubId;
+        if (club != null) {
+            return club.getId();
+        } else {
+            return 0;
+        }
     }
 
     public void setClubId(int clubId) {
-        this.clubId = clubId;
+        Club club = new Club();
+        club.setId(clubId);
+        this.club = club;
+    }
+
+    public Coach getCoach() {
+        return coach;
+    }
+
+    public void setCoach(Coach coach) {
+        this.coach = coach;
     }
 
     public int getCoachId() {
-        return coachId;
+        if (coach != null) {
+            return coach.getId();
+        } else {
+            return 0;
+        }
     }
 
     public void setCoachId(int coachId) {
-        this.coachId = coachId;
+        Coach coach = new Coach();
+        coach.setId(coachId);
+        this.coach = coach;
     }
 
     @Override
@@ -82,8 +90,8 @@ public class Team {
         return "Team{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", clubId=" + clubId +
-                ", coachId=" + coachId +
+                ", club=" + club +
+                ", coach=" + coach +
                 '}';
     }
 }

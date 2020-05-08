@@ -10,31 +10,13 @@ public class Takepart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "clubid")
-    private int clubId;
+    @ManyToOne
+    @JoinColumn(name = "clubid")
+    private Club club;
 
-    @Column(name = "competitionid")
-    private int competitionId;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Takepart takepart = (Takepart) o;
-
-        if (id != takepart.id) return false;
-        if (clubId != takepart.clubId) return false;
-        return competitionId == takepart.competitionId;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + clubId;
-        result = 31 * result + competitionId;
-        return result;
-    }
+    @ManyToOne
+    @JoinColumn(name = "competitionid")
+    private Competition competition;
 
     public int getId() {
         return id;
@@ -44,28 +26,56 @@ public class Takepart {
         this.id = id;
     }
 
+    public Club getClub() {
+        return club;
+    }
+
+    public void setClub(Club club) {
+        this.club = club;
+    }
+
     public int getClubId() {
-        return clubId;
+        if (club != null) {
+            return club.getId();
+        } else {
+            return 0;
+        }
     }
 
     public void setClubId(int clubId) {
-        this.clubId = clubId;
+        Club club = new Club();
+        club.setId(clubId);
+        this.club = club;
+    }
+
+    public Competition getCompetition() {
+        return competition;
+    }
+
+    public void setCompetition(Competition competition) {
+        this.competition = competition;
     }
 
     public int getCompetitionId() {
-        return competitionId;
+        if (competition != null) {
+            return competition.getId();
+        } else {
+            return 0;
+        }
     }
 
     public void setCompetitionId(int competitionId) {
-        this.competitionId = competitionId;
+        Competition competition = new Competition();
+        competition.setId(competitionId);
+        this.competition = competition;
     }
 
     @Override
     public String toString() {
         return "Takepart{" +
                 "id=" + id +
-                ", clubId=" + clubId +
-                ", competitionId=" + competitionId +
+                ", club=" + club +
+                ", competition=" + competition +
                 '}';
     }
 }

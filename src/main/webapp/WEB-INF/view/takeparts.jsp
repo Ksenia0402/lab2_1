@@ -9,7 +9,7 @@
 <html>
 <head>
     <a href="/">Home</a>
-    <title>Coach</title>
+    <title>Takepart</title>
     <style type="text/css">
         .tg {
             border-collapse: collapse;
@@ -51,7 +51,7 @@
 </head>
 <body>
 <h1>
-    Coach
+    Takepart
 </h1>
 
 <c:url var="addAction" value="/takeparts"></c:url>
@@ -104,15 +104,15 @@
     <table class="tg">
         <tr>
             <th width="80">Takepart ID</th>
-            <th width="200">Club ID</th>
-            <th width="80">Competition ID</th>
+            <th width="200">Club</th>
+            <th width="80">Competition</th>
 
         </tr>
         <c:forEach items="${listTakeparts}" var="takepart">
             <tr>
                 <td>${takepart.id}</td>
-                <td>${takepart.clubId}</td>
-                <td>${takepart.competitionId}</td>
+                <td>${takepart.club.name}</td>
+                <td>${takepart.competition.name}</td>
 
                 <td><a href='<c:url value="/takeparts/edit/${takepart.id}"/>'>Edit</a></td>
                 <td><a href='<c:url value="/takeparts/delete/${takepart.id}"/>'>Delete</a></td>

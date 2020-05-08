@@ -2,13 +2,8 @@ package com.cheersport.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import javax.persistence.*;
-import java.io.Serializable;
-import java.math.BigInteger;
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
 @Embeddable
@@ -32,8 +27,9 @@ public class Sportsman {
     @Column(name = "rank")
     private String rank;
 
-    @Column(name = "teamid")
-    private int teamId;
+    @ManyToOne
+    @JoinColumn(name = "teamid", nullable = false)
+    private Team team;
 
     @Column(name = "agect")
     private String agect;
@@ -89,12 +85,26 @@ public class Sportsman {
         this.rank = rank;
     }
 
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
     public int getTeamId() {
-        return teamId;
+        if (team != null) {
+            return team.getId();
+        } else {
+            return 0;
+        }
     }
 
     public void setTeamId(int teamId) {
-        this.teamId = teamId;
+        Team team = new Team();
+        team.setId(teamId);
+        this.team = team;
     }
 
     public String getAgect() {
@@ -113,27 +123,8 @@ public class Sportsman {
                 ", birthday=" + birthday +
                 ", place='" + place + '\'' +
                 ", rank='" + rank + '\'' +
-                ", teamId=" + teamId +
+                ", team=" + team +
                 ", agect='" + agect + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Sportsman sportsman = (Sportsman) o;
-        return Objects.equals(id, sportsman.id) &&
-                Objects.equals(name, sportsman.name) &&
-                Objects.equals(birthday, sportsman.birthday) &&
-                Objects.equals(place, sportsman.place) &&
-                Objects.equals(rank, sportsman.rank) &&
-                Objects.equals(teamId, sportsman.teamId) &&
-                Objects.equals(agect, sportsman.agect);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, birthday, place, rank, teamId, agect);
     }
 }

@@ -145,7 +145,7 @@
             <th width="80">Birtday</th>
             <th width="80">Place</th>
             <th width="80">Rank</th>
-            <th width="80">Team id</th>
+            <th width="80">Team</th>
             <th width="80">Agect</th>
         </tr>
         <c:forEach items="${listSportsmans}" var="sportsman">
@@ -155,7 +155,7 @@
                 <td>${sportsman.birthday}</td>
                 <td>${sportsman.place}</td>
                 <td>${sportsman.rank}</td>
-                <td>${sportsman.teamId}</td>
+                <td>${sportsman.team.name}</td>
                 <td>${sportsman.agect}</td>
                 <td><a href='<c:url value="/sportsmans/edit/${sportsman.id}"/>'>Edit</a></td>
                 <td><a href='<c:url value="/sportsmans/delete/${sportsman.id}"/>'>Delete</a></td>

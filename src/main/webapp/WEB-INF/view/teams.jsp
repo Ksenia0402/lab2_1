@@ -1,4 +1,4 @@
-<<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
@@ -51,7 +51,7 @@
 </head>
 <body>
 <h1>
-    Teams
+    Team
 </h1>
 
 <c:url var="addAction" value="/teams"></c:url>
@@ -86,7 +86,7 @@
             <td>
                 <form:input path="clubId"/>
             </td>
-        </tr>'
+        </tr>
         <tr>
             <td>
                 <form:label path="coachId">
@@ -111,15 +111,15 @@
         <tr>
             <th width="80">TeamId</th>
             <th width="200">Name</th>
-            <th width="80">ClubID</th>
-            <th width="80">CoachID</th>
+            <th width="80">Club</th>
+            <th width="80">Coach</th>
         </tr>
         <c:forEach items="${listTeams}" var="item">
             <tr>
                 <td>${item.id}</td>
                 <td>${item.name}</td>
-                <td>${item.clubId}</td>
-                <td>${item.coachId}</td>
+                <td>${item.club.name}</td>
+                <td>${item.coach.name}</td>
 
                 <td><a href='<c:url value="/teams/edit/${item.id}"/>'>Edit</a></td>
                 <td><a href='<c:url value="/teams/delete/${item.id}"/>'>Delete</a></td>

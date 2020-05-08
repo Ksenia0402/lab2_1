@@ -1,6 +1,7 @@
 package com.cheersport.dao;
 
-import com.cheersport.model.Sportsman;
+import com.cheersport.model.Club;
+import com.cheersport.model.Competition;
 import com.cheersport.model.Takepart;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -30,6 +31,12 @@ public class TakepartDao {
 
     public void addTakepart(Takepart t) {
         Session session = sessionFactory.getCurrentSession();
+        Club club = (Club) session.createQuery("select c from Club c where c.id = " + t.getClubId()).uniqueResult();
+        Competition competition = (Competition) session.createQuery("select c from Competition c where c.id = " + t.getCompetitionId()).uniqueResult();
+
+        t.setClub(club);
+        t.setCompetition(competition);
+
         session.saveOrUpdate(t);
     }
 
