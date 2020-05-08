@@ -1,8 +1,11 @@
 package com.cheersport.model;
 
+import com.cheersport.validator.IsDate;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.util.Date;
 
 @Entity
@@ -57,8 +60,8 @@ public class Sportsman {
         return new SimpleDateFormat("yyyy-MM-dd").format(birthday);
     }
 
-    public void setBirthdayText(String birthdayText) throws ParseException {
-        this.birthday = new SimpleDateFormat("yyy-MM-dd").parse(birthdayText);
+    public void setBirthdayText(/*@Valid @IsDate(pattern = "yyyy-MM-dd") */String birthdayText) throws ParseException {
+        this.birthday = new SimpleDateFormat("yyyy-MM-dd").parse(birthdayText);
     }
 
     public Date getBirthday() {

@@ -110,7 +110,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit" value="<spring:message text="Add club"/>"/>
+                <input type="submit" value="<spring:message text="Add"/>"/>
             </td>
         </tr>
     </table>

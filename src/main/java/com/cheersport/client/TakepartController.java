@@ -1,9 +1,10 @@
 package com.cheersport.client;
 
 import com.cheersport.model.Takepart;
+import com.cheersport.service.ClubService;
+import com.cheersport.service.CompetitionService;
 import com.cheersport.service.TakepartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,25 +18,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/takeparts")
 public class TakepartController {
 
+    @Autowired
     private TakepartService takepartService;
 
     @Autowired
-    @Qualifier(value = "takepartService")
-    public void setTakepartService(TakepartService ps) {
-        this.takepartService = ps;
-    }
+    private ClubService clubService;
+
+    @Autowired
+    private CompetitionService competitionService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String showAll(Model model) {
         model.addAttribute("takepart", new Takepart());
-        model.addAttribute("listTakeparts", takepartService.listTakepart());
+        fillModel(model);
         return "/takeparts";
     }
 
     @RequestMapping(value ="/edit/{id}", method = RequestMethod.GET)
     public String edit(Model model, @PathVariable("id") int editId) {
         model.addAttribute("takepart",takepartService.getTakepart(editId));
-        model.addAttribute("listTakeparts", takepartService.listTakepart());
+        fillModel(model);
         return "/takeparts";
     }
 
@@ -50,8 +52,14 @@ public class TakepartController {
         takepartService.deleteTakepart(id);
 
         model.addAttribute("takepart", new Takepart());
-        model.addAttribute("listTakeparts", takepartService.listTakepart());
+        fillModel(model);
         return "/takeparts";
+    }
+
+    private void fillModel(Model model) {
+        model.addAttribute("listTakeparts", takepartService.listTakepart());
+        model.addAttribute("clubs", clubService.listClub());
+        model.addAttribute("competitions", competitionService.listCompetition());
     }
 
 

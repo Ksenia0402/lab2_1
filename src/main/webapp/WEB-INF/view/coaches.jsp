@@ -101,7 +101,7 @@
 
         <tr>
             <td colspan="2">
-                <input type="submit" value="<spring:message text="Add coach"/>"/>
+                <input type="submit" value="<spring:message text="Add"/>"/>
             </td>
         </tr>
     </table>

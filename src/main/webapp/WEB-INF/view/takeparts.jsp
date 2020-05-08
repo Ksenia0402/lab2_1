@@ -71,11 +71,13 @@
         <tr>
             <td>
                 <form:label path="clubId">
-                    <spring:message text="Club id"/>
+                    <spring:message text="Club"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="clubId"/>
+                <form:select path="clubId">
+                    <form:options items="${clubs}" itemValue="id" itemLabel="name"/>
+                </form:select>
             </td>
         </tr>
 
@@ -83,17 +85,19 @@
         <tr>
             <td>
                 <form:label path="competitionId">
-                    <spring:message text="Competition id"/>
+                    <spring:message text="Competition"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="competitionId"/>
+                <form:select path="competitionId">
+                    <form:options items="${competitions}" itemValue="id" itemLabel="name"/>
+                </form:select>
             </td>
         </tr>
 
         <tr>
             <td colspan="2">
-                <input type="submit" value="<spring:message text="Add sportsman"/>"/>
+                <input type="submit" value="<spring:message text="Add"/>"/>
             </td>
         </tr>
     </table>

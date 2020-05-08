@@ -80,26 +80,30 @@
         <tr>
             <td>
                 <form:label path="clubId">
-                    <spring:message text="Club id"/>
+                    <spring:message text="Club"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="clubId"/>
+                <form:select path="clubId">
+                    <form:options items="${clubs}" itemValue="id" itemLabel="name"/>
+                </form:select>
             </td>
         </tr>
         <tr>
             <td>
                 <form:label path="coachId">
-                    <spring:message text="Coach Id"/>
+                    <spring:message text="Coach"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="coachId"/>
+                <form:select path="coachId">
+                    <form:options items="${coaches}" itemValue="id" itemLabel="name"/>
+                </form:select>
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit" value="<spring:message text="Add club"/>"/>
+                <input type="submit" value="<spring:message text="Add"/>"/>
             </td>
         </tr>
     </table>

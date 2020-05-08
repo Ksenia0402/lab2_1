@@ -111,11 +111,13 @@
         <tr>
             <td>
                 <form:label path="teamId">
-                    <spring:message text="Team id"/>
+                    <spring:message text="Team"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="teamId"/>
+                <form:select path="teamId">
+                    <form:options items="${teams}" itemValue="id" itemLabel="name"/>
+                </form:select>
             </td>
         </tr>
         <tr>
@@ -125,12 +127,14 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="agect"/>
+                <form:select path="agect">
+                    <form:options items="${agects}" itemValue="name" itemLabel="name"/>
+                </form:select>
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit" value="<spring:message text="Add sportsman"/>"/>
+                <input type="submit" value="<spring:message text="Add"/>"/>
             </td>
         </tr>
     </table>

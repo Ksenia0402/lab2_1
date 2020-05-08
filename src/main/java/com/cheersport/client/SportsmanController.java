@@ -1,7 +1,9 @@
 package com.cheersport.client;
 
+import com.cheersport.model.Agect;
 import com.cheersport.model.Sportsman;
 import com.cheersport.service.SportsmanService;
+import com.cheersport.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ImportResource;
@@ -17,13 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/sportsmans")
 public class SportsmanController {
 
+    @Autowired
     private SportsmanService sportsmanService;
 
     @Autowired
-    @Qualifier(value = "sportsmanService")
-    public void setSportsmanService(SportsmanService ps) {
-        this.sportsmanService = ps;
-    }
+    private TeamService teamService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String showAll(Model model) {
@@ -56,6 +56,8 @@ public class SportsmanController {
 
     private void fillModel(Model model) {
         model.addAttribute("listSportsmans", sportsmanService.listSportsman());
+        model.addAttribute("teams", teamService.listTeam());
+        model.addAttribute("agects", Agect.values());
         model.addAttribute("query1", sportsmanService.getSportsmanOrderByPlace());
         model.addAttribute("query2", sportsmanService.getSportsmanWhereAgectIsAdult());
         model.addAttribute("query3", sportsmanService.getSportsmanSomeColumns());
